@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>51视频每日大赛-热门视频合集_每日大赛看点速览</title>
+<meta name="description" content="51视频每日大赛每日更新热点视频合集，展示当日热门内容、看点速览与话题风向，方便你快速了解当下讨论集中的视频看点。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111a2b'/%3E%3Cpath d='M24 18l24 14-24 14z' fill='%23ff5d3b'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0d1220;
+  --bg-soft:#141b2e;
+  --panel:#182034;
+  --line:rgba(255,255,255,.09);
+  --text:#eef2fa;
+  --muted:#9aa7c2;
+  --accent:#ff5d3b;
+  --accent-2:#ffb03a;
+  --radius:16px;
+  --max:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:radial-gradient(1200px 600px at 80% -10%,rgba(255,93,59,.16),transparent 60%),
+             radial-gradient(900px 500px at -10% 10%,rgba(255,176,58,.10),transparent 55%),
+             var(--bg);
+  color:var(--text);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 20px}
+
+/* header */
+.site-head{position:sticky;top:0;z-index:30;backdrop-filter:blur(14px);
+  background:rgba(13,18,32,.82);border-bottom:1px solid var(--line)}
+.head-in{display:flex;align-items:center;gap:22px;height:66px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.3px;white-space:nowrap}
+.brand .mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(140deg,var(--accent),var(--accent-2));
+  display:grid;place-items:center;flex:none;box-shadow:0 6px 18px rgba(255,93,59,.35)}
+.brand .mark svg{width:16px;height:16px}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.nav a{padding:7px 13px;border-radius:9px;font-size:14.5px;color:var(--muted);transition:.2s}
+.nav a:hover,.nav a.on{color:#fff;background:rgba(255,255,255,.08)}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--line);color:var(--text);
+  border-radius:9px;padding:7px 11px;font-size:14px;cursor:pointer}
+
+/* hero */
+.hero{padding:54px 0 40px;display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--accent-2);
+  border:1px solid rgba(255,176,58,.35);background:rgba(255,176,58,.08);padding:5px 12px;border-radius:99px;margin-bottom:18px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-2);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+h1{font-size:clamp(30px,4.4vw,46px);line-height:1.18;font-weight:800;letter-spacing:-.5px}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{margin-top:18px;color:var(--muted);font-size:16px;max-width:520px}
+.hero-cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:11px;font-size:15px;font-weight:600;transition:.2s}
+.btn-primary{background:linear-gradient(100deg,var(--accent),#ff7a4d);color:#fff;box-shadow:0 10px 26px rgba(255,93,59,.32)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line);color:var(--text);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.hero-visual{position:relative;border-radius:22px;padding:22px;background:linear-gradient(160deg,var(--panel),#101728);
+  border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.hero-visual .tag{position:absolute;top:-12px;left:22px;background:var(--accent);color:#fff;font-size:12px;
+  font-weight:700;padding:4px 12px;border-radius:8px;letter-spacing:.5px}
+.screen{border-radius:14px;overflow:hidden;background:#0a0f1c;border:1px solid var(--line)}
+.hero-list{margin-top:16px;display:grid;gap:9px}
+.hero-list li{list-style:none;display:flex;justify-content:space-between;gap:10px;
+  font-size:13.5px;color:var(--muted);padding:8px 12px;background:rgba(255,255,255,.04);border-radius:9px}
+.hero-list b{color:var(--text);font-weight:600}
+.hero-list span{color:var(--accent-2);font-variant-numeric:tabular-nums}
+
+/* sections */
+section{padding:46px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:26px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(21px,2.6vw,27px);font-weight:800;letter-spacing:-.3px}
+.sec-head p{color:var(--muted);font-size:14.5px;max-width:560px;margin-top:6px}
+.sec-head .more{font-size:14px;color:var(--accent-2);white-space:nowrap}
+
+/* cards */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:linear-gradient(170deg,var(--bg-soft),#101728);border:1px solid var(--line);
+  border-radius:var(--radius);padding:22px;transition:.25s}
+.card:hover{border-color:rgba(255,93,59,.4);transform:translateY(-3px)}
+.card .ico{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;margin-bottom:14px;
+  background:rgba(255,93,59,.12);border:1px solid rgba(255,93,59,.22)}
+.card .ico svg{width:19px;height:19px;stroke:var(--accent)}
+.card h3{font-size:16.5px;font-weight:700;margin-bottom:8px}
+.card p{font-size:14.2px;color:var(--muted)}
+.card .meta{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-size:12px;color:var(--accent-2);background:rgba(255,176,58,.1);border:1px solid rgba(255,176,58,.22);
+  padding:3px 9px;border-radius:99px}
+
+/* ranking */
+.rank-box{background:linear-gradient(170deg,var(--bg-soft),#101728);border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden}
+.rank-row{display:flex;align-items:center;gap:16px;padding:15px 20px;border-bottom:1px solid var(--line)}
+.rank-row:last-child{border-bottom:none}
+.rank-no{width:26px;font-weight:800;font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums;flex:none;text-align:center}
+.rank-row:nth-child(1) .rank-no{color:var(--accent)}
+.rank-row:nth-child(2) .rank-no{color:var(--accent-2)}
+.rank-row:nth-child(3) .rank-no{color:#ffd88a}
+.rank-main{flex:1;min-width:0}
+.rank-main b{display:block;font-size:14.8px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank-main small{color:var(--muted);font-size:12.5px}
+.rank-heat{font-size:12.5px;color:var(--muted);flex:none;font-variant-numeric:tabular-nums}
+
+/* filter */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.toolbar input{flex:1;min-width:200px;background:var(--bg-soft);border:1px solid var(--line);color:var(--text);
+  padding:11px 15px;border-radius:11px;font-size:14.5px;outline:none}
+.toolbar input:focus{border-color:var(--accent)}
+.toolbar button{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text);
+  padding:11px 18px;border-radius:11px;font-size:14.5px;cursor:pointer;transition:.2s}
+.toolbar button:hover{background:rgba(255,93,59,.18);border-color:var(--accent)}
+.toolbar button.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.filter-item{transition:.2s}
+.filter-item.hide{display:none}
+.empty-tip{display:none;color:var(--muted);font-size:14.5px;padding:18px 0}
+.empty-tip.show{display:block}
+
+/* prose */
+.prose{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+.prose h2{font-size:clamp(21px,2.6vw,27px);font-weight:800;margin-bottom:16px}
+.prose p{font-size:15px;color:var(--muted);margin-bottom:14px}
+.prose strong{color:var(--text);font-weight:600}
+.panel{background:linear-gradient(170deg,var(--bg-soft),#101728);border:1px solid var(--line);
+  border-radius:var(--radius);padding:26px}
+.steps{list-style:none;display:grid;gap:16px}
+.steps li{display:flex;gap:14px}
+.steps .num{flex:none;width:28px;height:28px;border-radius:8px;background:rgba(255,93,59,.15);
+  border:1px solid rgba(255,93,59,.3);color:var(--accent);font-weight:700;font-size:13.5px;display:grid;place-items:center}
+.steps b{display:block;font-size:15px;margin-bottom:3px}
+.steps span{font-size:13.8px;color:var(--muted)}
+
+/* download */
+.dl-band{margin-top:36px;background:linear-gradient(110deg,rgba(255,93,59,.16),rgba(255,176,58,.08));
+  border:1px solid rgba(255,93,59,.28);border-radius:20px;padding:30px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.dl-band h2{font-size:21px;font-weight:800;margin-bottom:6px}
+.dl-band p{font-size:14.2px;color:var(--muted);max-width:560px}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:11px;font-size:15px;
+  font-weight:700;background:linear-gradient(100deg,var(--accent),#ff7a4d);color:#fff;
+  box-shadow:0 10px 26px rgba(255,93,59,.3);pointer-events:none;opacity:.95}
+
+/* footer */
+.site-foot{border-top:1px solid var(--line);margin-top:50px;padding:34px 0 28px;background:rgba(10,15,28,.6)}
+.foot-in{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+.foot-brand{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--text);font-size:15px;margin-bottom:8px}
+.foot-brand .mark{width:26px;height:26px;border-radius:8px;background:linear-gradient(140deg,var(--accent),var(--accent-2));
+  display:grid;place-items:center}
+.foot-brand .mark svg{width:12px;height:12px}
+.foot-links{display:flex;gap:16px;flex-wrap:wrap}
+.foot-links a:hover{color:var(--accent-2)}
+.copy{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font-size:12.8px;color:#72809b}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:32px;padding:36px 0 28px}
+  .grid-3{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .prose{grid-template-columns:1fr;gap:24px}
+  .nav{display:none;position:absolute;top:66px;left:0;right:0;background:#0f1526;
+    border-bottom:1px solid var(--line);flex-direction:column;padding:10px 16px 16px;gap:2px}
+  .nav.open{display:flex}
+  .nav a{padding:10px 12px}
+  .menu-btn{display:block}
+  .head-in{position:relative}
+  .brand{font-size:16px}
+  .dl-band{padding:22px}
+}
+@media (max-width:480px){
+  h1{font-size:28px}
+  .hero-cta .btn{width:100%;justify-content:center}
+}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="51视频每日大赛 首页">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5l12 7-12 7z"/></svg>
+      </span>
+      51视频每日大赛
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">菜单</button>
+    <nav class="nav" id="mainNav" aria-label="主导航">
+      <a href="#today" class="on">今日看点</a>
+      <a href="#rank">热度榜</a>
+      <a href="#archive">往期回看</a>
+      <a href="#guide">怎么看</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>每日更新 · 热点视频合集</span>
+        <h1 id="heroTitle">51视频每日大赛</h1>
+        <p class="lead">每天汇总当日讨论集中、播放走高的视频内容，按看点分类呈现。打开这一页，就能看清今天大家在看什么、聊什么，再从入口进入具体内容。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#today">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5l12 7-12 7z"/></svg>
+            查看今日看点
+          </a>
+          <a class="btn btn-ghost" href="#rank">浏览热度榜</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <span class="tag">今日速览</span>
+        <div class="screen" aria-hidden="true">
+          <svg viewBox="0 0 400 210" role="img" aria-label="视频合集示意图">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#22304d"/><stop offset="1" stop-color="#141c2e"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#ff5d3b"/><stop offset="1" stop-color="#ffb03a"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="210" fill="url(#g1)"/>
+            <circle cx="330" cy="46" r="70" fill="#ff5d3b" opacity=".12"/>
+            <circle cx="60" cy="180" r="60" fill="#ffb03a" opacity=".10"/>
+            <rect x="26" y="26" width="128" height="76" rx="9" fill="#1d2842" stroke="#2c3a5c"/>
+            <rect x="146" y="26" width="92" height="76" rx="9" fill="#1d2842" stroke="#2c3a5c"/>
+            <rect x="248" y="26" width="126" height="76" rx="9" fill="#1d2842" stroke="#2c3a5c"/>
+            <circle cx="90" cy="64" r="16" fill="url(#g2)"/>
+            <path d="M85 57l12 7-12 7z" fill="#141c2e"/>
+            <rect x="164" y="60" width="56" height="6" rx="3" fill="#3a4a70"/>
+            <rect x="164" y="74" width="40" height="6" rx="3" fill="#2f3d5e"/>
+            <rect x="266" y="60" width="86" height="6" rx="3" fill="#3a4a70"/>
+            <rect x="266" y="74" width="58" height="6" rx="3" fill="#2f3d5e"/>
+            <rect x="26" y="118" width="348" height="10" rx="5" fill="#1d2842"/>
+            <rect x="26" y="118" width="212" height="10" rx="5" fill="url(#g2)" opacity=".85"/>
+            <rect x="26" y="144" width="160" height="8" rx="4" fill="#26334f"/>
+            <rect x="26" y="162" width="112" height="8" rx="4" fill="#26334f"/>
+            <rect x="26" y="180" width="196" height="8" rx="4" fill="#26334f"/>
+          </svg>
+        </div>
+        <ul class="hero-list">
+          <li><b>热点合集</b><span>持续更新</span></li>
+          <li><b>分类看点</b><span>按类型分组</span></li>
+          <li><b>热度排序</b><span>每日刷新</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- TODAY -->
+    <section id="today" aria-labelledby="todayTitle">
+      <div class="sec-head">
+        <div>
+          <h2 id="todayTitle">今日看点分区</h2>
+          <p>51视频每日大赛的内容按看点类型归入几个区域，每个区域对应一种浏览需求。想看轻松的内容，可以先从娱乐段子区开始；想了解大家正在讨论什么，热度榜更直接。</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M10 9l5 3-5 3z"/></svg></div>
+          <h3>视频合集区</h3>
+          <p>把同一主题下的多条视频放在一处，减少来回翻找。合集内按更新顺序排列，方便你顺着看下去，也方便回头补看漏掉的部分。</p>
+          <div class="meta"><span class="chip">合集</span><span class="chip">连续更新</span></div>
+        </article>
+
+        <article class="card">
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.1 6-5.3-3-5.3 3 1.1-6L3.3 9.4l6.1-.8z"/></svg></div>
+          <h3>热度榜</h3>
+          <p>按当天的讨论与播放情况排序，展示排名靠前的内容标题与简要说明。榜单位置每天变化，看榜能快速判断当下哪些内容更受关注。</p>
+          <div class="meta"><span class="chip">每日排序</span></div>
+        </article>
+
+        <article class="card">
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3>往期回看</h3>
+          <p>当天的内容过去之后仍可翻阅。往期区域保留日期与主题标签，按时间顺序排列，适合想补看某个话题前后经过的访问者。</p>
+          <div class="meta"><span class="chip">按日期</span><span class="chip">可翻阅</span></div>
+        </article>
+
+        <article class="card">
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h13"/></svg></div>
+          <h3>分类看点</h3>
+          <p>娱乐段子、生活趣事、创意短片等类型分开陈列。分类不是为了细分到底，而是让你在不感兴趣的题材上少花时间。</p>
+          <div class="meta"><span class="chip">按类型</span></div>
+        </article>
+
+        <article class="card">
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-4-7.5"/><path d="M21 4v5h-5"/></svg></div>
+          <h3>实时更新</h3>
+          <p>页面内容随当天进度补充，新出现的热点会在更新时进入对应分区。刷新页面即可看到新加入的条目，无需登录。</p>
+          <div class="meta"><span class="chip">当日刷新</span></div>
+        </article>
+
+        <article class="card">
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg></div>
+          <h3>话题标签</h3>
+          <p>每条内容附带话题标签，点击标签可查看同一话题下的其他视频。标签也是判断内容所属方向最直观的线索。</p>
+          <div class="meta"><span class="chip">标签聚合</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- RANK -->
+    <section id="rank" aria-labelledby="rankTitle">
+      <div class="sec-head">
+        <div>
+          <h2 id="rankTitle">热度榜速览</h2>
+          <p>下面的条目是 51视频每日大赛 中排序靠前的示例内容，用于说明榜单的呈现方式。名次随当天情况变动，这里展示的是结构而非固定结果。</p>
+        </div>
+        <a class="more" href="#archive">查看往期榜单 →</a>
+      </div>
+
+      <div class="rank-box">
+        <div class="rank-row">
+          <span class="rank-no">1</span>
+          <div class="rank-main"><b>今日热门合集 · 娱乐段子精选</b><small>标签：娱乐 · 合集</small></div>
+          <span class="rank-heat">热度靠前</span>
+        </div>
+        <div class="rank-row">
+          <span class="rank-no">2</span>
+          <div class="rank-main"><b>生活趣事合集 · 当日新增</b><small>标签：生活 · 更新</small></div>
+          <span class="rank-heat">热度靠前</span>
+        </div>
+        <div class="rank-row">
+          <span class="rank-no">3</span>
+          <div class="rank-main"><b>创意短片专题 · 话题聚合</b><small>标签：创意 · 话题</small></div>
+          <span class="rank-heat">热度上升</span>
+        </div>
+        <div class="rank-row">
+          <span class="rank-no">4</span>
+          <div class="rank-main"><b>热门片段回看 · 往期收录</b><small>标签：回看 · 往期</small></div>
+          <span class="rank-heat">稳定</span>
+        </div>
+        <div class="rank-row">
+          <span class="rank-no">5</span>
+          <div class="rank-main"><b>讨论集中内容 · 当日看点</b><small>标签：讨论 · 看点</small></div>
+          <span class="rank-heat">稳定</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHIVE / FILTER -->
+    <section id="archive" aria-labelledby="archiveTitle">
+      <div class="sec-head">
+        <div>
+          <h2 id="archiveTitle">往期回看与筛选</h2>
+          <p>往期内容按主题归档。输入关键词或点选分类，可快速定位到对应条目；没有匹配结果时页面会给出提示，不会留白。</p>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <input type="search" id="searchInput" placeholder="搜索往期主题，例如：娱乐、生活、创意" aria-label="搜索往期主题">
+        <button class="active" data-cat="all">全部</button>
+        <button data-cat="娱乐">娱乐</button>
+        <button data-cat="生活">生活</button>
+        <button data-cat="创意">创意</button>
+        <button data-cat="讨论">讨论</button>
+      </div>
+
+      <div class="grid-2" id="archiveList">
+        <article class="card filter-item" data-cat="娱乐">
+          <h3>娱乐段子专题回看</h3>
+          <p>收录同一话题下陆续出现的短视频片段，按出现顺序排列。适合想一次看完某类轻松内容的访问者。</p>
+          <div class="meta"><span class="chip">娱乐</span><span class="chip">合集回看</span></div>
+        </article>
+        <article class="card filter-item" data-cat="生活">
+          <h3>生活趣事当日收录</h3>
+          <p>记录日常场景里的有趣片段，更新频率随当天内容量变化。每条的标签注明所属方向，便于跳过不感兴趣的部分。</p>
+          <div class="meta"><span class="chip">生活</span><span class="chip">当日</span></div>
+        </article>
+        <article class="card filter-item" data-cat="创意">
+          <h3>创意短片话题聚合</h3>
+          <p>围绕同一创作话题聚合多条短片，展示不同角度的呈现方式。点击话题标签可继续查看相关内容。</p>
+          <div class="meta"><span class="chip">创意</span><span class="chip">话题</span></div>
+        </article>
+        <article class="card filter-item" data-cat="讨论">
+          <h3>讨论集中内容速览</h3>
+          <p>把当天被反复提到的内容集中列出，并附简要说明，帮助访问者理解讨论的来由，而不只是看到标题。</p>
+          <div class="meta"><span class="chip">讨论</span><span class="chip">速览</span></div>
+        </article>
+        <article class="card filter-item" data-cat="娱乐">
+          <h3>热门片段往期榜单</h3>
+          <p>保留此前几天排序靠前的条目，用于对比不同日期的关注点变化。榜单只反映收录时的排序情况。</p>
+          <div class="meta"><span class="chip">娱乐</span><span class="chip">榜单</span></div>
+        </article>
+        <article class="card filter-item" data-cat="生活">
+          <h3>日常片段分类归档</h3>
+          <p>按主题把零散片段归入同一分类，减少重复浏览。归档以日期为顺序，较新的条目排在前面。</p>
+          <div class="meta"><span class="chip">生活</span><span class="chip">归档</span></div>
+        </article>
+      </div>
+      <p class="empty-tip" id="emptyTip">没有找到匹配的往期条目，换个关键词或选择“全部”再试试。</p>
+    </section>
+
+    <!-- GUIDE -->
+    <section id="guide" aria-labelledby="guideTitle">
+      <div class="prose">
+        <div>
+          <h2 id="guideTitle">怎么看这份每日合集</h2>
+          <p>51视频每日大赛 的核心是“每日”与“合集”两件事。每日意味着内容随日期变化，同一条目在不同时间进入的位置可能不同；合集意味着内容被整理成组，而不是零散罗列。理解这两点，浏览效率会明显提升。</p>
+          <p>第一次访问，建议先看<strong>今日看点分区</strong>，确定自己感兴趣的类别，再进入对应合集。如果你更关心大众关注点，直接看<strong>热度榜速览</strong>更省时间。榜单只表示收录时的排序，不等于对内容质量的评价。</p>
+          <p>想补看某个话题的前后经过，用<strong>往期回看与筛选</strong>。输入主题词即可缩小范围，分类按钮与搜索可以叠加使用。51视频每日大赛 的归档以主题为线索，不按播放量高低重排，因此更适合顺着时间了解一个话题。</p>
+          <p>页面内容在当天内会持续补充，刷新即可看到新增条目。如果你在某次访问中没找到想看的方向，可以稍后再看，或换用其他关键词检索。</p>
+        </div>
+
+        <div class="panel">
+          <h2 style="font-size:19px;margin-bottom:20px">四步浏览路径</h2>
+          <ul class="steps">
+            <li><span class="num">1</span><div><b>先定方向</b><span>在今日看点分区里挑一个类别，避免无目的翻找。</span></div></li>
+            <li><span class="num">2</span><div><b>再看热度</b><span>热度榜给出当日排序靠前的条目，用于判断关注点。</span></div></li>
+            <li><span class="num">3</span><div><b>顺着话题</b><span>点击话题标签，查看同一方向下的其他内容。</span></div></li>
+            <li><span class="num">4</span><div><b>回看归档</b><span>用筛选与搜索补看往期，理解话题的来龙去脉。</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dl-band">
+        <div>
+          <h2>保存这份浏览入口</h2>
+          <p>把 51视频每日大赛 首页下载到本地或加入收藏，下次打开即可直接进入今日看点，不必重新搜索。</p>
+        </div>
+        <a class="dl-btn" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>
+          下载
+        </a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" aria-labelledby="faqTitle">
+      <div class="sec-head">
+        <div>
+          <h2 id="faqTitle">常见问题</h2>
+          <p>关于更新节奏、榜单含义与筛选方式，这里给出直接回答。</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <article class="card">
+          <h3>内容多久更新一次？</h3>
+          <p>51视频每日大赛 按天整理内容，当天内会随收录进度补充新条目。具体数量取决于当天出现的相关内容多少，没有固定条数。</p>
+        </article>
+        <article class="card">
+          <h3>热度榜是永久排名吗？</h3>
+          <p>不是。榜单反映收录时的排序情况，不同日期会变化。往期榜单单独归档，可与当日榜单对照查看。</p>
+        </article>
+        <article class="card">
+          <h3>需要注册才能浏览吗？</h3>
+          <p>浏览今日看点、热度榜与往期归档均不需要注册。筛选与搜索在页面内直接完成，输入后即时生效。</p>
+        </article>
+        <article class="card">
+          <h3>搜不到想看的内容怎么办？</h3>
+          <p>可以先把分类切回“全部”，再换更短的关键词重试。归档只包含已收录的主题，未收录的方向不会出现在结果中。</p>
+        </article>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-in">
+      <div>
+        <div class="foot-brand">
+          <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5l12 7-12 7z"/></svg></span>
+          51视频每日大赛
+        </div>
+        <p>每日热点视频合集与看点速览，按分区、榜单与归档组织内容，方便快速定位想看的方向。</p>
+      </div>
+      <nav class="foot-links" aria-label="页尾导航">
+        <a href="#today">今日看点</a>
+        <a href="#rank">热度榜</a>
+        <a href="#archive">往期回看</a>
+        <a href="#guide">怎么看</a>
+        <a href="#faq">常见问题</a>
+      </nav>
+    </div>
+    <p class="copy">© 51视频每日大赛 · 页面内容为每日收录的视频合集与看点梳理，排序与收录情况以当日页面展示为准。</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn');
+  var nav=document.getElementById('mainNav');
+  btn.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  nav.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');}
+  });
+
+  var input=document.getElementById('searchInput');
+  var items=Array.prototype.slice.call(document.querySelectorAll('.filter-item'));
+  var tip=document.getElementById('emptyTip');
+  var catBtns=Array.prototype.slice.call(document.querySelectorAll('.toolbar button'));
+  var currentCat='all';
+
+  function apply(){
+    var kw=(input.value||'').trim().toLowerCase();
+    var shown=0;
+    items.forEach(function(el){
+      var cat=el.getAttribute('data-cat')||'';
+      var text=el.textContent.toLowerCase();
+      var okCat=(currentCat==='all'||cat===currentCat);
+      var okKw=(kw===''||text.indexOf(kw)>-1);
+      var show=okCat&&okKw;
+      el.classList.toggle('hide',!show);
+      if(show) shown++;
+    });
+    tip.classList.toggle('show',shown===0);
+  }
+
+  catBtns.forEach(function(b){
+    b.addEventListener('click',function(){
+      catBtns.forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');
+      currentCat=b.getAttribute('data-cat');
+      apply();
+    });
+  });
+  input.addEventListener('input',apply);
+})();
+</script>
+</body>
+</html>
