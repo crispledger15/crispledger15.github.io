@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>天天美剧-美剧在线观看_天天美剧首页推荐与追剧清单</title>
+<meta name="description" content="天天美剧首页，汇集美剧在线观看入口、分类浏览与本周追剧清单，按类型与更新时间查找想看的剧集，帮助观众快速进入天天美剧的观剧节奏。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111a2b'/%3E%3Cpath d='M9 21V11l7 5 7-5v10' fill='none' stroke='%23f2c14e' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink:#111a2b;
+    --ink-2:#1c2740;
+    --paper:#f7f4ee;
+    --card:#ffffff;
+    --gold:#e0a92e;
+    --gold-soft:#f6e3b4;
+    --muted:#5d6577;
+    --line:#e2ddd2;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.75;
+    font-size:16px;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px;}
+
+  /* 页头 */
+  header.site{
+    background:var(--ink);
+    color:#f2efe6;
+    position:sticky;top:0;z-index:50;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .head-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:18px;padding:14px 0;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:11px;}
+  .brand-mark{
+    width:38px;height:38px;border-radius:10px;
+    background:linear-gradient(140deg,#f2c14e,#c98a12);
+    display:flex;align-items:center;justify-content:center;flex:0 0 auto;
+  }
+  .brand-text{
+    font-size:20px;font-weight:800;letter-spacing:.5px;color:#fff;white-space:nowrap;
+  }
+  nav.main ul{
+    list-style:none;display:flex;gap:22px;margin:0;padding:0;flex-wrap:wrap;
+  }
+  nav.main a{
+    font-size:14.5px;color:#cfd3dc;padding:4px 0;border-bottom:2px solid transparent;transition:.2s;
+  }
+  nav.main a:hover,nav.main a:focus-visible{color:#fff;border-bottom-color:var(--gold);}
+  .head-cta{
+    background:var(--gold);color:#20180a;font-weight:700;font-size:14px;
+    padding:9px 18px;border-radius:999px;white-space:nowrap;
+  }
+  .head-cta:hover{background:#f0b93c;}
+
+  /* 首屏 */
+  .hero{
+    background:
+      radial-gradient(900px 380px at 88% -10%, rgba(224,169,46,.22), transparent 70%),
+      linear-gradient(180deg,#111a2b 0%, #16203a 62%, #1b2742 100%);
+    color:#f4f1e8;
+    padding:56px 0 60px;
+    position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-120px;bottom:-140px;width:420px;height:420px;
+    border:1px solid rgba(240,193,78,.22);border-radius:50%;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:44px;align-items:center;position:relative;z-index:2;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;letter-spacing:1.5px;color:var(--gold-soft);
+    border:1px solid rgba(240,193,78,.4);border-radius:999px;padding:5px 14px;margin-bottom:18px;
+  }
+  h1{
+    font-size:clamp(30px,4.6vw,46px);
+    line-height:1.22;margin:0 0 18px;font-weight:800;letter-spacing:1px;color:#fff;
+  }
+  .hero p.lead{
+    font-size:16.5px;color:#c9cfdb;margin:0 0 26px;max-width:36em;
+  }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--gold);color:#20180a;font-weight:700;
+    padding:12px 26px;border-radius:10px;font-size:15.5px;
+  }
+  .btn-primary:hover{background:#f0b93c;}
+  .btn-ghost{
+    border:1px solid rgba(255,255,255,.35);color:#f4f1e8;
+    padding:12px 24px;border-radius:10px;font-size:15.5px;
+  }
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-soft);}
+  .hero-stats{display:flex;gap:30px;margin-top:34px;flex-wrap:wrap;}
+  .hero-stats b{display:block;font-size:22px;color:#fff;line-height:1.3;}
+  .hero-stats span{font-size:13px;color:#98a1b3;}
+  .poster-card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:18px;padding:18px;
+  }
+  .poster-thumb{
+    border-radius:12px;overflow:hidden;background:#0d1524;
+  }
+  .poster-meta{padding-top:14px;}
+  .poster-meta strong{display:block;font-size:16px;color:#fff;}
+  .poster-meta em{font-style:normal;font-size:13px;color:#9aa3b5;}
+  .tag{
+    display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;
+    background:rgba(240,193,78,.16);color:var(--gold-soft);margin-top:8px;
+  }
+
+  /* 通用分区 */
+  section{padding:56px 0;}
+  .sec-head{margin-bottom:28px;}
+  .sec-head h2{
+    font-size:24px;margin:0 0 8px;font-weight:800;letter-spacing:.5px;
+  }
+  .sec-head p{margin:0;color:var(--muted);font-size:15px;max-width:48em;}
+  .sec-line{width:52px;height:3px;background:var(--gold);border-radius:2px;margin-bottom:16px;}
+
+  /* 追剧清单 */
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;display:flex;flex-direction:column;
+  }
+  .card .num{
+    font-size:13px;font-weight:800;color:var(--gold);letter-spacing:1px;margin-bottom:10px;
+  }
+  .card h3{font-size:17px;margin:0 0 10px;font-weight:700;}
+  .card p{margin:0;font-size:14.5px;color:var(--muted);}
+  .card .meta{margin-top:14px;font-size:13px;color:#8a8f9c;border-top:1px dashed var(--line);padding-top:12px;}
+
+  /* 分类 */
+  .cat-wrap{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px;}
+  .chip{
+    font-size:14px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);
+    background:#faf8f3;color:var(--ink-2);cursor:pointer;transition:.18s;font-family:inherit;
+  }
+  .chip:hover{border-color:var(--gold);}
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .cat-item{
+    background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px;
+    transition:.18s;
+  }
+  .cat-item:hover{border-color:var(--gold);transform:translateY(-2px);}
+  .cat-item h3{font-size:16px;margin:0 0 6px;}
+  .cat-item p{font-size:13.5px;color:var(--muted);margin:0;}
+
+  /* 更新节奏表 */
+  .schedule{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+  .day{
+    background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;
+  }
+  .day b{display:block;font-size:14px;margin-bottom:8px;color:var(--ink);}
+  .day span{display:block;font-size:13px;color:var(--muted);line-height:1.9;}
+
+  /* 正文说明 */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:start;}
+  .about-grid h2{font-size:23px;margin:0 0 14px;font-weight:800;}
+  .about-grid p{font-size:15px;color:#3c4454;margin:0 0 14px;}
+  .aside-box{
+    background:var(--ink);color:#e8e6df;border-radius:var(--radius);padding:26px;
+  }
+  .aside-box h3{font-size:16px;margin:0 0 12px;color:var(--gold-soft);}
+  .aside-box ul{margin:0;padding-left:18px;font-size:14px;color:#c3c8d3;line-height:2;}
+  .aside-box p{font-size:14px;color:#c3c8d3;margin:14px 0 0;}
+
+  /* 下载 */
+  .download-band{
+    background:linear-gradient(120deg,#1b2742,#111a2b);
+    color:#f4f1e8;border-radius:18px;padding:38px 34px;
+    display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;
+  }
+  .download-band h2{font-size:21px;margin:0 0 8px;font-weight:800;color:#fff;}
+  .download-band p{margin:0;font-size:14.5px;color:#b9c0ce;max-width:40em;}
+  .btn-download{
+    display:inline-block;background:var(--gold);color:#20180a;font-weight:700;
+    padding:12px 30px;border-radius:10px;font-size:15.5px;
+    pointer-events:none;opacity:.95;
+  }
+
+  /* 页尾 */
+  footer.site{
+    background:var(--ink);color:#a8afbd;padding:40px 0 28px;font-size:14px;
+  }
+  .foot-top{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .foot-brand{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .foot-brand .brand-text{font-size:18px;}
+  .foot-links{display:flex;gap:26px;flex-wrap:wrap;}
+  .foot-links a{color:#c3c8d3;font-size:14px;}
+  .foot-links a:hover{color:var(--gold-soft);}
+  .foot-bottom{padding-top:18px;font-size:13px;color:#7d8494;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:30px;}
+    .poster-card{max-width:340px;}
+    .grid-3{grid-template-columns:1fr 1fr;}
+    .cat-grid{grid-template-columns:1fr 1fr;}
+    .schedule{grid-template-columns:1fr 1fr;}
+    .about-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:620px){
+    body{font-size:15.5px;}
+    .head-inner{padding:12px 0;}
+    nav.main ul{gap:14px;}
+    nav.main a{font-size:13.5px;}
+    .hero{padding:38px 0 44px;}
+    section{padding:40px 0;}
+    .grid-3{grid-template-columns:1fr;}
+    .cat-grid{grid-template-columns:1fr;}
+    .schedule{grid-template-columns:1fr;}
+    .hero-stats{gap:20px;}
+    .download-band{padding:28px 22px;}
+    .card{padding:18px;}
+  }
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap head-inner">
+    <a class="brand" href="#top" aria-label="天天美剧首页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#20180a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 18V7l8 5 8-5v11"/>
+        </svg>
+      </span>
+      <span class="brand-text">天天美剧</span>
+    </a>
+    <nav class="main" aria-label="主导航">
+      <ul>
+        <li><a href="#list">本周追剧</a></li>
+        <li><a href="#category">分类浏览</a></li>
+        <li><a href="#schedule">更新时间</a></li>
+        <li><a href="#about">关于站点</a></li>
+      </ul>
+    </nav>
+    <a class="head-cta" href="#list">开始追剧</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">美剧在线观看 · 每日更新</span>
+        <h1>天天美剧</h1>
+        <p class="lead">天天美剧是一个围绕美剧观看与追剧节奏搭建的首页入口。这里把剧集分类、更新时间和本周看点放在一起，让你打开页面就能决定今晚看什么，不必在多个页面之间来回翻找。</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#list">查看本周追剧清单</a>
+          <a class="btn-ghost" href="#category">按类型找剧</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>5</b><span>更新日分组</span></div>
+          <div><b>8</b><span>常见类型分区</span></div>
+          <div><b>7</b><span>本周推荐剧集</span></div>
+        </div>
+      </div>
+      <div class="poster-card">
+        <div class="poster-thumb">
+          <svg viewBox="0 0 320 200" role="img" aria-label="剧集封面示意插画">
+            <defs>
+              <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#1d2a45"/>
+                <stop offset="1" stop-color="#0c1322"/>
+              </linearGradient>
+            </defs>
+            <rect width="320" height="200" fill="url(#pg)"/>
+            <circle cx="262" cy="46" r="30" fill="#f2c14e" opacity="0.9"/>
+            <path d="M0 168 L70 118 L128 152 L196 96 L260 140 L320 108 L320 200 L0 200 Z" fill="#16233c"/>
+            <path d="M0 182 L82 146 L150 172 L222 132 L320 168 L320 200 L0 200 Z" fill="#0e1728"/>
+            <g stroke="#f2c14e" stroke-width="2" opacity="0.85">
+              <path d="M28 40 h20 M38 30 v20"/>
+              <path d="M270 150 h16 M278 142 v16"/>
+            </g>
+          </svg>
+        </div>
+        <div class="poster-meta">
+          <strong>今晚看点 · 剧情与悬疑</strong>
+          <em>适合一次连看两集的节奏</em>
+          <span class="tag">天天美剧 编辑推荐</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 本周追剧清单 -->
+  <section id="list">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-line"></div>
+        <h2>本周追剧清单</h2>
+        <p>清单按观看节奏排列，而不是按热度堆叠。每条都说明适合什么样的时间与心情，你可以从任意一条进入天天美剧的剧集页面。</p>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <span class="num">01 / 强情节</span>
+          <h3>悬疑线：一集一个钩子</h3>
+          <p>适合睡前看一集却常常停不下来的观众。剧情推进紧凑，线索在每集结尾重新排列，第二天回看也不会断档。</p>
+          <span class="meta">建议观看：单集 45–55 分钟</span>
+        </article>
+        <article class="card">
+          <span class="num">02 / 群像</span>
+          <h3>都市群像：人物比事件更好看</h3>
+          <p>多线并行的叙事，把注意力放在人物关系的变化上。适合周末连看，节奏舒缓，不依赖强反转。</p>
+          <span class="meta">建议观看：周末连看 2–3 集</span>
+        </article>
+        <article class="card">
+          <span class="num">03 / 轻喜剧</span>
+          <h3>轻喜剧：下班后的放松选项</h3>
+          <p>单集时长短，情节独立性强，从任意一集进入都不影响理解。适合把碎片时间填满，也适合当作背景声。</p>
+          <span class="meta">建议观看：单集 22–30 分钟</span>
+        </article>
+        <article class="card">
+          <span class="num">04 / 罪案</span>
+          <h3>罪案单元剧：一集一个案子</h3>
+          <p>结构清晰，每集自成闭环，主线在季末才慢慢浮出。适合不想被长线剧情绑住的观众。</p>
+          <span class="meta">建议观看：按顺序任意集</span>
+        </article>
+        <article class="card">
+          <span class="num">05 / 科幻</span>
+          <h3>科幻设定：世界观先行</h3>
+          <p>设定信息量大，前两集需要耐心。建议从第一集开始，按顺序观看，才能跟上后面的规则变化。</p>
+          <span class="meta">建议观看：从第一集顺序看</span>
+        </article>
+        <article class="card">
+          <span class="num">06 / 老剧重看</span>
+          <h3>经典重看：熟悉感也是看点</h3>
+          <p>已经完结、剧情完整的剧集，适合在等待更新时补课。天天美剧的更新节奏栏目会标出仍在更新的剧集，方便区分。</p>
+          <span class="meta">建议观看：随心情挑集</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分类浏览 -->
+  <div class="cat-wrap">
+    <section id="category">
+      <div class="wrap">
+        <div class="sec-head">
+          <div class="sec-line"></div>
+          <h2>分类浏览</h2>
+          <p>先定类型，再定时间。分类入口帮助你在天天美剧里缩小范围，下面列出常见的几种观看偏好。</p>
+        </div>
+        <div class="chips" role="group" aria-label="类型筛选">
+          <button class="chip active" type="button" data-cat="all">全部</button>
+          <button class="chip" type="button" data-cat="剧情">剧情</button>
+          <button class="chip" type="button" data-cat="悬疑">悬疑</button>
+          <button class="chip" type="button" data-cat="喜剧">喜剧</button>
+          <button class="chip" type="button" data-cat="罪案">罪案</button>
+          <button class="chip" type="button" data-cat="科幻">科幻</button>
+        </div>
+        <div class="cat-grid" id="catGrid">
+          <a class="cat-item" href="#list" data-cat="剧情">
+            <h3>剧情</h3>
+            <p>人物成长与关系推进为主，适合慢慢看、慢慢聊。</p>
+          </a>
+          <a class="cat-item" href="#list" data-cat="悬疑">
+            <h3>悬疑</h3>
+            <p>线索密集，反转靠前，适合连续观看保持记忆。</p>
+          </a>
+          <a class="cat-item" href="#list" data-cat="喜剧">
+            <h3>喜剧</h3>
+            <p>单集独立，随时进入，适合碎片时间与放松场景。</p>
+          </a>
+          <a class="cat-item" href="#list" data-cat="罪案">
+            <h3>罪案</h3>
+            <p>单元结构清晰，主线埋伏在季末，追起来不费劲。</p>
+          </a>
+          <a class="cat-item" href="#list" data-cat="科幻">
+            <h3>科幻</h3>
+            <p>设定复杂，建议按顺序看，先理解规则再享受故事。</p>
+          </a>
+          <a class="cat-item" href="#list" data-cat="剧情">
+            <h3>家庭</h3>
+            <p>以日常生活为切口，情绪细腻，适合安静地看。</p>
+          </a>
+          <a class="cat-item" href="#list" data-cat="悬疑">
+            <h3>惊悚</h3>
+            <p>氛围优先，节奏压得住，建议白天或开灯观看。</p>
+          </a>
+          <a class="cat-item" href="#list" data-cat="喜剧">
+            <h3>轻喜</h3>
+            <p>时长友好，剧情轻巧，适合作为忙碌一天后的收尾。</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 更新时间 -->
+  <section id="schedule">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-line"></div>
+        <h2>更新时间与观看节奏</h2>
+        <p>追剧最怕记不住更新日。把一周分成五个时段，先看今天有没有新内容，再决定是否补旧集。天天美剧的更新节奏以周为单位，便于安排零散时间。</p>
+      </div>
+      <div class="schedule">
+        <div class="day"><b>周一</b><span>罪案单元剧为主</span><span>适合看一集收心</span></div>
+        <div class="day"><b>周二</b><span>悬疑线集中更新</span><span>建议连看两集</span></div>
+        <div class="day"><b>周三</b><span>都市群像与家庭</span><span>节奏舒缓</span></div>
+        <div class="day"><b>周四</b><span>科幻叙事推进</span><span>注意前面伏笔</span></div>
+        <div class="day"><b>周五</b><span>轻喜剧补位</span><span>周末预热</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于站点 -->
+  <section id="about" style="background:#fff;border-top:1px solid var(--line);">
+    <div class="wrap about-grid">
+      <div>
+        <div class="sec-line"></div>
+        <h2>天天美剧在做什么</h2>
+        <p>天天美剧把美剧的观看入口、类型分类与更新节奏集中在一个首页。它的重点不是把所有剧集塞进一个列表，而是帮观众先想清楚三件事：今天有多少时间、想看什么类型、这部剧是否还在更新。</p>
+        <p>页面上的追剧清单按观看场景分组，分类浏览按题材划分，更新时间按周排列。三个栏目各自回答一个问题，合在一起就是一条从「找剧」到「开始看」的路径。你不需要先注册或者先搜索，直接在首屏选择入口即可。</p>
+        <p>对于刚接触美剧的观众，建议从轻喜剧或罪案单元剧开始，单集独立、进入门槛低；对于已经追了一段时间的观众，悬疑与科幻更适合按顺序看，避免被跳跃的集数打断线索。天天美剧的推荐理由都写在卡片里，方便你先判断再决定。</p>
+      </div>
+      <aside class="aside-box">
+        <h3>使用小提示</h3>
+        <ul>
+          <li>先看首屏入口，再进分类缩小范围</li>
+          <li>更新日栏目可用来安排每晚时长</li>
+          <li>清单中的「建议观看」写给不同时间预算</li>
+          <li>老剧与更新中剧集可分开安排</li>
+        </ul>
+        <p>所有栏目都可以从页头导航直接跳到对应位置，移动端同样保留完整入口。</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 下载 -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="download-band">
+        <div>
+          <h2>下载天天美剧追剧清单</h2>
+          <p>把本周推荐与更新日整理成一页，方便离线查看与安排观看时间。适合习惯先计划再开看的观众。</p>
+        </div>
+        <a class="btn-download" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">下载</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#20180a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 18V7l8 5 8-5v11"/>
+            </svg>
+          </span>
+          <span class="brand-text">天天美剧</span>
+        </div>
+        <p style="margin:0;max-width:30em;color:#8f97a6;">天天美剧首页，围绕美剧在线观看、分类浏览与追剧节奏组织内容，帮助观众更快找到今晚想看的那一部。</p>
+      </div>
+      <nav class="foot-links" aria-label="页尾导航">
+        <a href="#list">本周追剧</a>
+        <a href="#category">分类浏览</a>
+        <a href="#schedule">更新时间</a>
+        <a href="#about">关于站点</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>天天美剧 · 内容以页面展示为准</span>
+      <span>浏览建议：按类型筛选后再决定观看顺序</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var chips = document.querySelectorAll('.chip');
+    var items = document.querySelectorAll('#catGrid .cat-item');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        chips.forEach(function(c){ c.classList.remove('active'); });
+        chip.classList.add('active');
+        var cat = chip.getAttribute('data-cat');
+        items.forEach(function(item){
+          var match = (cat === 'all') || (item.getAttribute('data-cat') === cat);
+          item.style.display = match ? '' : 'none';
+        });
+      });
+    });
+    var dl = document.querySelector('[data-download-placeholder="true"]');
+    if (dl) {
+      dl.addEventListener('click', function(e){ e.preventDefault(); });
+    }
+  })();
+</script>
+</body>
+</html>
